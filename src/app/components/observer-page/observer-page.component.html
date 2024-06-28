@@ -1,0 +1,19 @@
+<div class="flex flex-col mt-10 items-center">
+  <div class="flex justify-between w-[1000px]">
+    <p-dropdown
+      styleClass="w-80"
+      [formControl]="instrumentsForm.controls.historyFrequency"
+      [options]="historyFrequencyOptions"
+      optionLabel="name">
+    </p-dropdown>
+
+    <app-instrument-select-form
+      [formControl]="instrumentsForm.controls.instrument"
+    ></app-instrument-select-form>
+
+    <p-button (click)="signOut()">Sign Out</p-button>
+  </div>
+
+  <app-instrument-history [symbol]="instrumentsForm.value.instrument?.symbol"></app-instrument-history>
+</div>
+

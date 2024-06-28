@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "https://platform.fintacharts.com",
+    "changeOrigin": true
+  },
+  "/identity": {
+    "target": "https://platform.fintacharts.com",
+    "changeOrigin": true
+  },
+  "/assets": {
+    "target": "https://platform.fintacharts.com",
+    "changeOrigin": true
+  }
+}

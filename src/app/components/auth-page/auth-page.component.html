@@ -1,0 +1,16 @@
+<div class="flex items-center justify-center h-screen w-full">
+  <form class="border flex flex-col p-2 rounded gap-2" [formGroup]="authForm" (ngSubmit)="loginUser()">
+    <div>
+      <label class="block" for="email">Email:</label>
+      <input pInputText id="email" type="text" placeholder="Enter value" [formControl]="authForm.controls.email">
+    </div>
+
+    <div>
+      <label class="block" for="password">Password:</label>
+      <input pInputText id="password" type="password" placeholder="Enter value" [formControl]="authForm.controls.password">
+    </div>
+
+    <p-button type="submit">Sign in</p-button>
+  </form>
+</div>
+

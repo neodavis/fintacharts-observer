@@ -1,0 +1,56 @@
+<p-dropdown
+  styleClass="w-[550px]"
+  [formControl]="instrumentControl"
+  [options]="instruments$ | async"
+  optionLabel="symbol"
+  [showClear]="true"
+  placeholder="Select an Instrument"
+  [virtualScroll]="true"
+  [filter]="true"
+  [virtualScrollItemSize]="45"
+  [lazy]="true"
+  (onFocus)="onTouched()"
+  (onLazyLoad)="loadInstrumentsChunk($event)">
+  <ng-template pTemplate="filter">
+    <div class="flex gap-1">
+      <div class="p-inputgroup" (click)="$event.stopPropagation()">
+        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+        <input
+          type="text"
+          pInputText
+          placeholder="Filter"
+          [formControl]="symbolControl"
+        />
+      </div>
+    </div>
+    <div class="flex mt-2 pb-2 gap-1 w-[500px] flex-wrap">
+      @for (provider of providers$ | async; track provider) {
+        <p-toggleButton [onLabel]="provider | uppercase" [offLabel]="provider | uppercase" (onChange)="toggleProviderFilter(provider)"/>
+      }
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="selectedItem">
+    @if (instrumentControl.value; as selectedInstrument) {
+      <div class="flex align-items-center justify-between">
+        <div>{{ selectedInstrument.symbol }}</div>
+        <div class="flex items-center gap-2">
+          <div class="w-[90px] text-white rounded text-sm bg-green-400 text-center">{{ selectedInstrument.exchange | uppercase }}</div>
+          <div class="w-[90px] text-white rounded text-sm bg-orange-400 text-center">{{ selectedInstrument.kind | uppercase }}</div>
+          <div class="w-[110px] text-white rounded text-sm bg-blue-400 text-center">{{ selectedInstrument.provider | uppercase }}</div>
+        </div>
+      </div>
+    }
+  </ng-template>
+  <ng-template let-instrument pTemplate="item">
+    <div class="flex align-items-center justify-between">
+      <div>{{ instrument.symbol }}</div>
+      <div class="flex items-center gap-2">
+        <div class="w-[90px] text-white rounded text-sm bg-green-400 text-center">{{ instrument.exchange | uppercase }}</div>
+        <div class="w-[90px] text-white rounded text-sm bg-orange-400 text-center">{{ instrument.kind | uppercase }}</div>
+        <div class="w-[110px] text-white rounded text-sm bg-blue-400 text-center">{{ instrument.provider | uppercase }}</div>
+      </div>
+    </div>
+  </ng-template>
+</p-dropdown>
+
